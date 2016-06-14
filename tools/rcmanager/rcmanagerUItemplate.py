@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'rcmanagerUItemplate.ui'
 #
-# Created: Fri Jun 10 13:35:42 2016
+# Created: Sun Jun 12 22:44:07 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -37,33 +37,10 @@ class Ui_MainWindow(object):
         self.tab.setObjectName(_fromUtf8("tab"))
         self.gridLayout_4 = QtGui.QGridLayout(self.tab)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
-        self.tabWidget_2 = QtGui.QTabWidget(self.tab)
-        self.tabWidget_2.setObjectName(_fromUtf8("tabWidget_2"))
+        self.tabWidget.addTab(self.tab, _fromUtf8(""))
         self.tab_3 = QtGui.QWidget()
         self.tab_3.setObjectName(_fromUtf8("tab_3"))
-        self.gridLayout_5 = QtGui.QGridLayout(self.tab_3)
-        self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
-        self.label = QtGui.QLabel(self.tab_3)
-        self.label.setText(_fromUtf8(""))
-        self.label.setObjectName(_fromUtf8("label"))
-        self.gridLayout_5.addWidget(self.label, 0, 0, 1, 1)
-        self.textBrowser_2 = QtGui.QTextBrowser(self.tab_3)
-        self.textBrowser_2.setObjectName(_fromUtf8("textBrowser_2"))
-        self.gridLayout_5.addWidget(self.textBrowser_2, 0, 1, 1, 1)
-        self.tabWidget_2.addTab(self.tab_3, _fromUtf8(""))
-        self.tab_5 = QtGui.QWidget()
-        self.tab_5.setObjectName(_fromUtf8("tab_5"))
-        self.gridLayout_7 = QtGui.QGridLayout(self.tab_5)
-        self.gridLayout_7.setObjectName(_fromUtf8("gridLayout_7"))
-        self.textEdit = QtGui.QTextEdit(self.tab_5)
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        self.gridLayout_7.addWidget(self.textEdit, 0, 0, 1, 1)
-        self.tabWidget_2.addTab(self.tab_5, _fromUtf8(""))
-        self.tab_4 = QtGui.QWidget()
-        self.tab_4.setObjectName(_fromUtf8("tab_4"))
-        self.tabWidget_2.addTab(self.tab_4, _fromUtf8(""))
-        self.gridLayout_4.addWidget(self.tabWidget_2, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.tab, _fromUtf8(""))
+        self.tabWidget.addTab(self.tab_3, _fromUtf8(""))
         self.tab_2 = QtGui.QWidget()
         self.tab_2.setObjectName(_fromUtf8("tab_2"))
         self.tabWidget.addTab(self.tab_2, _fromUtf8(""))
@@ -122,7 +99,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents = QtGui.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 204, 341))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 297, 227))
         self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -254,17 +231,14 @@ class Ui_MainWindow(object):
         self.toolBar.addSeparator()
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), _translate("MainWindow", "Graph Tree", None))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), _translate("MainWindow", "Component Editor", None))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), _translate("MainWindow", "Control panel", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Network 1", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Network 2", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Control panel", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Control panel", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Component Editor", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.menuSimulations.setTitle(_translate("MainWindow", "Tools", None))
         self.menuSimulator.setTitle(_translate("MainWindow", "Simulator", None))
