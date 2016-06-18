@@ -31,7 +31,13 @@ import sys, time, traceback, os, math, random, threading, time
 import Ice
 
 from PyQt4 import QtCore, QtGui, Qt
-import rcmanagerUItemplate,VisualNode
+import rcmanagerUItemplate,VisualNode,rcmanagerConfignew
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
 
 class MainClass(QtGui.QMainWindow):
 	"""docstring for MainClass"""
@@ -39,20 +45,40 @@ class MainClass(QtGui.QMainWindow):
 		QtGui.QDialog.__init__(self,arg)
 		self.UI=rcmanagerUItemplate.Ui_MainWindow()
 		self.UI.setupUi(self)
-		self.NetworkScene=QtGui.QGraphicsScene()
-		self.UI.graphicsView.setScene(self.NetworkScene)
+		self.NetworkScene=QtGui.QGraphicsScene()##The graphicsScene
 		self.node=VisualNode.VisualNode()
+		self.graphTree = rcmanagerConfignew.ComponentTree(self.UI.frame,self)##The graphicsNode
+		self.graphTree.setScene(self.NetworkScene)
+		self.graphTree.setObjectName(_fromUtf8("graphicsView"))
+		self.UI.gridLayout_8.addWidget(self.graphTree,0,0,1,1)
 		self.node1=VisualNode.VisualNode()
-		self.node1.setPos(500,500)
 		self.NetworkScene.addItem(self.node1)
 		self.NetworkScene.addItem(self.node)
-		#self.NetworkScene.addLine(-1000,-1000,1000,1000) ##Checking 
-	def addNode(self):#For adding a new Node 
+		self.setZoom()
+	def setZoom(self): ##This will connect the slider motion to zooming
+		self.UI.verticalSlider.setRange(-10,10)
+		self.UI.verticalSlider.setTickInterval(1)
+		self.UI.verticalSlider.setValue(0)
+		self.currentZoom=0
+		self.UI.verticalSlider.valueChanged.connect(self.graphZoom)
+	def graphZoom(self):##
+		new=self.UI.verticalSlider.value()
+		diff=new-self.currentZoom
+		self.currentZoom=new
+		zoomingfactor=math.pow(1.2,diff)
+		#print zoomingfactor
+		self.graphTree.scale(zoomingfactor,zoomingfactor)
+	def addNode(self):#For adding a new directly
 		pass
 	def savexmlfile(self):
 		pass
 	def openxmlfile(self):
 		pass
+	def addComponent(self):#adding new component on the right component list
+		pass
+	def newComponentEntered(self):
+		pass
+
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)
 	window=MainClass()

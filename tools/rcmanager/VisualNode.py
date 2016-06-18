@@ -103,3 +103,25 @@ class VisualNode(QtGui.QGraphicsItem):
 		brush=QtGui.QBrush(color) ##Drawing the Status display rectangle
 		painter.setBrush(brush)
 		painter.drawRect(self.statusRect)
+
+class RightClickOptions(QtGui.QWidget):##What appears when we right click on the GraphicsItem
+	def __init__(self, parent, x, y):
+		QtGui.QWidget.__init__(self)
+		self.setParent(parent)
+		self.setGeometry(x, y, 100, 75)
+		self.button1 = QtGui.QLabel(self)
+		self.button1.setGeometry(0, 0, 100, 25)
+		self.button1.setText('up')
+		self.button2 = QtGui.QLabel(self)
+		self.button2.setGeometry(0, 25, 100, 25)
+		self.button2.setText('down')
+		self.button3 = QtGui.QPushButton(self)
+		self.button3.setGeometry(0, 50, 100, 25)
+		self.button3.setText('edit config')
+		self.show() 
+		self.connect(self.button1, QtCore.SIGNAL('clicked()'), self.but1)
+		self.connect(self.button2, QtCore.SIGNAL('clicked()'), self.but2)
+		self.connect(self.button3, QtCore.SIGNAL('clicked()'), self.but3)
+	def but1(self): self.emit(QtCore.SIGNAL("up()"))
+	def but2(self): self.emit(QtCore.SIGNAL("down()"))
+	def but3(self): self.emit(QtCore.SIGNAL("config()"))	

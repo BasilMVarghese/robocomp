@@ -902,5 +902,5 @@ if __name__ == '__main__':
 	except:
 		print 'Some error happened.'
 
-	sys.exit()
+	sys.exit(
 
