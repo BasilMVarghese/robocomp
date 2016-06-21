@@ -45,16 +45,45 @@ class MainClass(QtGui.QMainWindow):
 		QtGui.QDialog.__init__(self,arg)
 		self.UI=rcmanagerUItemplate.Ui_MainWindow()
 		self.UI.setupUi(self)
-		self.NetworkScene=QtGui.QGraphicsScene()##The graphicsScene
+		self.NetworkScene=rcmanagerConfignew.ComponentScene()##The graphicsScene
 		self.graphTree = rcmanagerConfignew.ComponentTree(self.UI.frame,self)##The graphicsNode
 		self.graphTree.setScene(self.NetworkScene)
 		self.graphTree.setObjectName(_fromUtf8("graphicsView"))
 		self.UI.gridLayout_8.addWidget(self.graphTree,0,0,1,1)
 		self.node=VisualNode.VisualNode(self.graphTree)
-		self.node1=VisualNode.VisualNode(self.graphTree)
-		self.NetworkScene.addItem(self.node1)
 		self.NetworkScene.addItem(self.node)
 		self.setZoom()
+		self.setupActions()
+	def setupActions(self):##This will setUp connection like saving,opening,etc
+		self.connect(self.UI.actionSave,QtCore.SIGNAL("triggered(bool)"),self.saveXmlFile)
+		self.connect(self.UI.actionOpen,QtCore.SIGNAL("triggered(bool)"),self.openXmlFile)
+		self.connect(self.UI.actionExit,QtCore.SIGNAL("triggered(bool)"),self.exitRcmanager)
+		self.connect(self.UI.actionSetting,QtCore.SIGNAL("triggered(bool)"),self.rcmanagerSetting)
+		self.connect(self.UI.actionOn,QtCore.SIGNAL("triggered(bool)"),self.simulatorOn)
+		self.connect(self.UI.actionOff,QtCore.SIGNAL("triggered(bool)"),self.simulatorOff)
+		self.connect(self.UI.action,QtCore.SIGNAL("triggered(bool)"),self.saveXmlFile)
+		self.connect(self.UI.actionSetting_2,QtCore.SIGNAL("triggered(bool)"),self.simulatorSettings)
+		self.connect(self.UI.actionSettings_3,QtCore.SIGNAL("triggered(bool)"),self.controlPanelSettings)
+		self.connect(self.UI.actionSettings_4,QtCore.SIGNAL("triggered(bool)"),self.editorSettings)
+	def simulatorSettings(self):##To edit the simulatorSettings:Unfinished
+		print "Simulator settings is on"
+	def controlPanelSettings(self):##To edit the controlPanel Settings:Unfinshed
+		print "Control panel settings"
+	def editorSettings(self):##To edit the editors settins:Unfinshed
+		print "Editor Settings"
+		
+	def simulatorOff(self):	#To switch Off the simulator::Unfiunished
+		print "Simulator is Off"
+	def simulatorOn(self):#To switch ON simulator::Unfinished
+		print "Simulator is On"
+	def rcmanagerSetting(self):#To edit the setting of the entire rcmanager settings tool
+		print "Opened tool settings"	
+	def exitRcmanager(self):##To exit the tool after doing all required process
+		print "Exiting"
+	def openXmlFile(self):#To open the xml files ::Unfinished
+		print "Opening file"
+	def saveXmlFile(self):##To save the entire treesetting into a xml file::Unfinished
+		print "Saving"		
 	def setZoom(self): ##This will connect the slider motion to zooming
 		self.UI.verticalSlider.setRange(-10,10)
 		self.UI.verticalSlider.setTickInterval(1)

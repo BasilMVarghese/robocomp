@@ -35,7 +35,7 @@ class VisualNode(QtGui.QGraphicsItem):
 		self.IpColor=QtGui.QColor(QtGui.QColor.fromRgb(0,0,255))##To be set after checking the IP
 	def boundingRect(self):
 		self.penWidth =2
-		return QtCore.QRectF(-70,-70,70,70,)
+		return QtCore.QRectF(-49,-49,98,98)
 	def paint(self,painter,option=None,widget=None):
 		self.paintMainShape(painter)
 		self.drawStatus(painter)
@@ -55,7 +55,8 @@ class VisualNode(QtGui.QGraphicsItem):
 		self.TextRect=QtCore.QRect(-45,-45,90,20)##The rectangle shape on which the alias name will be dispalyed
 		self.statusRect=QtCore.QRect(22,10,20,20)##The rectange shape on which the status of the node will be displayed
 		self.IconRect=QtCore.QRect(-45,-20,60,64)## The rectange shape on which the Icon will be displayed
-
+		self.drawConnection(painter,"UP","INCOMMING")
+		self.drawConnection(painter,"RIGHT","OUTGOING")
 		painter.drawRect(self.TextRect) ##Drawing the Alias display rectangle
 
 		painter.setBrush(self.IpColor)  ## Drawing the Icon display rectangle
@@ -106,28 +107,7 @@ class VisualNode(QtGui.QGraphicsItem):
 		painter.drawRect(self.statusRect)
 	def contextMenuEvent(self,event):
 		pos=event.screenPos()
-		print pos
-		self.view.CompoPopUpMenu.popup(pos)
+		print "read from component"+str(pos)
+		#self.view.CompoPopUpMenu.popup(pos)
 
 
-class RightClickOptions(QtGui.QWidget):##What appears when we right click on the GraphicsItem
-	def __init__(self, parent, x, y):
-		QtGui.QWidget.__init__(self)
-		self.setParent(parent)
-		self.setGeometry(x, y, 100, 75)
-		self.button1 = QtGui.QLabel(self)
-		self.button1.setGeometry(0, 0, 100, 25)
-		self.button1.setText('up')
-		self.button2 = QtGui.QLabel(self)
-		self.button2.setGeometry(0, 25, 100, 25)
-		self.button2.setText('down')
-		self.button3 = QtGui.QPushButton(self)
-		self.button3.setGeometry(0, 50, 100, 25)
-		self.button3.setText('edit config')
-		self.show() 
-		self.connect(self.button1, QtCore.SIGNAL('clicked()'), self.but1)
-		self.connect(self.button2, QtCore.SIGNAL('clicked()'), self.but2)
-		self.connect(self.button3, QtCore.SIGNAL('clicked()'), self.but3)
-	def but1(self): self.emit(QtCore.SIGNAL("up()"))
-	def but2(self): self.emit(QtCore.SIGNAL("down()"))
-	def but3(self): self.emit(QtCore.SIGNAL("config()"))	

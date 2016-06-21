@@ -56,7 +56,7 @@ class CompInfo:##This contain the general Information about the Components which
 		string = string + 'x:         \t' + str(self.x) + '\n'
 		string = string + 'y:         \t' + str(self.y) + '\n'
 		return string	
-class  ComponentTree(QtGui.QGraphicsView):	##This is a subClass of QGraphicsView which is the widget used to draw the component tree.
+class  ComponentTree(QtGui.QGraphicsView):	##The widget on which we are going to draw the graphtree 
 	def __init__(self,parent,mainclass):
 		QtGui.QGraphicsView.__init__(self,parent)
 		self.mainclass=mainclass#This object is the mainClass from rcmanager Module
@@ -68,10 +68,22 @@ class  ComponentTree(QtGui.QGraphicsView):	##This is a subClass of QGraphicsView
 		temp+=(wheel.delta()/120)
 		self.mainclass.UI.verticalSlider.setValue(temp)
 		self.mainclass.graphZoom()
-	def contextMenuEvent(self,arg):
-		pos=arg.globalPos()
-		self.BackPopUpMenu.popup(pos)
-		
+	def contextMenuEvent(self,event):##It will select what kind of context menu should be displayed
+		pos=event.pos()
+		item=self.itemAt(pos)
+		if item:
+			self.CompoPopUpMenu.popup(pos)
+		else:
+			self.BackPopUpMenu.popup(pos)
+
+
+
+class ComponentScene(QtGui.QGraphicsScene):#The scene onwhich we are drawing the graph
+	def __init__(self,arg=None):
+		QtGui.QGraphicsScene.__init__(self)
+		self.arg=arg
+	
+
 
 class ComponentMenu(QtGui.QMenu):
 	def  __init__(self,parent):
