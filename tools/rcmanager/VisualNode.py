@@ -23,8 +23,9 @@ except AttributeError:
 
 class VisualNode(QtGui.QGraphicsItem):
 	"""docstring for ClassName"""
-	def __init__(self, arg=None):
+	def __init__(self, view,arg=None):
 		QtGui.QGraphicsItem.__init__(self,arg)
+		self.view=view
 		self.Alias=None
 		self.upconnections=0
 		self.downconnections=0
@@ -103,6 +104,11 @@ class VisualNode(QtGui.QGraphicsItem):
 		brush=QtGui.QBrush(color) ##Drawing the Status display rectangle
 		painter.setBrush(brush)
 		painter.drawRect(self.statusRect)
+	def contextMenuEvent(self,event):
+		pos=event.screenPos()
+		print pos
+		self.view.CompoPopUpMenu.popup(pos)
+
 
 class RightClickOptions(QtGui.QWidget):##What appears when we right click on the GraphicsItem
 	def __init__(self, parent, x, y):

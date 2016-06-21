@@ -70,10 +70,8 @@ class  ComponentTree(QtGui.QGraphicsView):	##This is a subClass of QGraphicsView
 		self.mainclass.graphZoom()
 	def contextMenuEvent(self,arg):
 		pos=arg.globalPos()
-		if self.itemAt(pos)==None:
-			self.BackPopUpMenu.popup(pos)
-		else:
-			self.CompoPopUpMenu.popup(pos)
+		self.BackPopUpMenu.popup(pos)
+		
 
 class ComponentMenu(QtGui.QMenu):
 	def  __init__(self,parent):

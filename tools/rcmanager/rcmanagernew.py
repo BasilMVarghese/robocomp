@@ -46,12 +46,12 @@ class MainClass(QtGui.QMainWindow):
 		self.UI=rcmanagerUItemplate.Ui_MainWindow()
 		self.UI.setupUi(self)
 		self.NetworkScene=QtGui.QGraphicsScene()##The graphicsScene
-		self.node=VisualNode.VisualNode()
 		self.graphTree = rcmanagerConfignew.ComponentTree(self.UI.frame,self)##The graphicsNode
 		self.graphTree.setScene(self.NetworkScene)
 		self.graphTree.setObjectName(_fromUtf8("graphicsView"))
 		self.UI.gridLayout_8.addWidget(self.graphTree,0,0,1,1)
-		self.node1=VisualNode.VisualNode()
+		self.node=VisualNode.VisualNode(self.graphTree)
+		self.node1=VisualNode.VisualNode(self.graphTree)
 		self.NetworkScene.addItem(self.node1)
 		self.NetworkScene.addItem(self.node)
 		self.setZoom()
