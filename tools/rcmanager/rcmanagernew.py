@@ -54,24 +54,53 @@ class MainClass(QtGui.QMainWindow):
 		self.NetworkScene.addItem(self.node)
 		self.setZoom()
 		self.setupActions()
-	def setupActions(self):##This will setUp connection like saving,opening,etc
+	def setupActions(self):##To setUp connection like saving,opening,etc
 		self.connect(self.UI.actionSave,QtCore.SIGNAL("triggered(bool)"),self.saveXmlFile)
 		self.connect(self.UI.actionOpen,QtCore.SIGNAL("triggered(bool)"),self.openXmlFile)
 		self.connect(self.UI.actionExit,QtCore.SIGNAL("triggered(bool)"),self.exitRcmanager)
 		self.connect(self.UI.actionSetting,QtCore.SIGNAL("triggered(bool)"),self.rcmanagerSetting)
-		self.connect(self.UI.actionOn,QtCore.SIGNAL("triggered(bool)"),self.simulatorOn)
-		self.connect(self.UI.actionOff,QtCore.SIGNAL("triggered(bool)"),self.simulatorOff)
-		self.connect(self.UI.action,QtCore.SIGNAL("triggered(bool)"),self.saveXmlFile)
+		self.connect(self.UI.actionON,QtCore.SIGNAL("triggered(bool)"),self.simulatorOn)
+		self.connect(self.UI.actionOFF,QtCore.SIGNAL("triggered(bool)"),self.simulatorOff)
 		self.connect(self.UI.actionSetting_2,QtCore.SIGNAL("triggered(bool)"),self.simulatorSettings)
-		self.connect(self.UI.actionSettings_3,QtCore.SIGNAL("triggered(bool)"),self.controlPanelSettings)
-		self.connect(self.UI.actionSettings_4,QtCore.SIGNAL("triggered(bool)"),self.editorSettings)
+		self.connect(self.UI.actionSetting_3,QtCore.SIGNAL("triggered(bool)"),self.controlPanelSettings)
+		self.connect(self.UI.actionSetting_4,QtCore.SIGNAL("triggered(bool)"),self.editorSettings)
+		self.connect(self.graphTree.BackPopUpMenu.ActionUp,QtCore.SIGNAL("triggered(bool)"),self.upAllComponents)
+		self.connect(self.graphTree.BackPopUpMenu.ActionDown,QtCore.SIGNAL("triggered(bool)"),self.downAllComponents)
+		self.connect(self.graphTree.BackPopUpMenu.ActionSearch,QtCore.SIGNAL("triggered(bool)"),self.searchInsideTree)
+		self.connect(self.graphTree.BackPopUpMenu.ActionAdd,QtCore.SIGNAL("triggered(bool)"),self.addNode)		
+		self.connect(self.graphTree.BackPopUpMenu.ActionSettings,QtCore.SIGNAL("triggered(bool)"),self.networkSettings)
+		self.connect(self.graphTree.CompoPopUpMenu.ActionUp,QtCore.SIGNAL("triggered(bool)"),self.upComponent)
+		self.connect(self.graphTree.CompoPopUpMenu.ActionDown,QtCore.SIGNAL("triggered(bool)"),self.downComponent)
+		#self.connect(self.graphTree.CompoPopUpMenu.ActionNewConnection,QtCore.SIGNAL("triggered(bool)"),self.upComponent)
+		self.connect(self.graphTree.CompoPopUpMenu.ActionControl,QtCore.SIGNAL("triggered(bool)"),self.controlComponent)
+		self.connect(self.graphTree.CompoPopUpMenu.ActionSettings,QtCore.SIGNAL("triggered(bool)"),self.componentSettings)
+
+
+		
+	def componentSettings(self,component):#To edit the settings of currentComponent
+		print "Settings of current component"
+	def controlComponent(self,component):#To open up the control panel of current component
+		print "Controlling the current component"	
+	def downComponent(self,component):#To down a particular component
+		print "Downing particular component"
+	def upComponent(self,component):#This will up a particular component
+		print "Uping particular component"
+	def networkSettings(self):#To edit the network tree general settings
+		print "network setting editing"	
+	def searchInsideTree(self):#To search a particular component from tree
+		print "Searching inside the tree"
+	def upAllComponents(self):#To set all components in up position
+		print "UPING ALL"
+	def downAllComponents(self):#To set all components in down position
+		print "Down All"
+	def drawfromfile(self,nodelist):#To be called when a new tree have to be drawn which was directly read from file
+		pass
 	def simulatorSettings(self):##To edit the simulatorSettings:Unfinished
 		print "Simulator settings is on"
 	def controlPanelSettings(self):##To edit the controlPanel Settings:Unfinshed
 		print "Control panel settings"
 	def editorSettings(self):##To edit the editors settins:Unfinshed
-		print "Editor Settings"
-		
+		print "Editor Settings"	
 	def simulatorOff(self):	#To switch Off the simulator::Unfiunished
 		print "Simulator is Off"
 	def simulatorOn(self):#To switch ON simulator::Unfinished
@@ -84,29 +113,24 @@ class MainClass(QtGui.QMainWindow):
 		print "Opening file"
 	def saveXmlFile(self):##To save the entire treesetting into a xml file::Unfinished
 		print "Saving"		
-	def setZoom(self): ##This will connect the slider motion to zooming
+	def setZoom(self): ##To connect the slider motion to zooming
 		self.UI.verticalSlider.setRange(-10,10)
 		self.UI.verticalSlider.setTickInterval(1)
 		self.UI.verticalSlider.setValue(0)
 		self.currentZoom=0
 		self.UI.verticalSlider.valueChanged.connect(self.graphZoom)
-	def graphZoom(self):##
+	def graphZoom(self):##To be called when ever we wants to zoomingfactor
 		new=self.UI.verticalSlider.value()
 		diff=new-self.currentZoom
 		self.currentZoom=new
 		zoomingfactor=math.pow(1.2,diff)
 		#print zoomingfactor
 		self.graphTree.scale(zoomingfactor,zoomingfactor)
-	def addNode(self):#For adding a new directly
-		pass
-	def savexmlfile(self):
-		pass
-	def openxmlfile(self):
+	def addNode(self):#For adding a new node in the network
 		pass
 	def addComponent(self):#adding new component on the right component list
 		pass
-	def newComponentEntered(self):
-		pass
+	
 
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)

@@ -72,6 +72,7 @@ class  ComponentTree(QtGui.QGraphicsView):	##The widget on which we are going to
 		pos=event.pos()
 		item=self.itemAt(pos)
 		if item:
+			self.CompoPopUpMenu.setComponent(item)
 			self.CompoPopUpMenu.popup(pos)
 		else:
 			self.BackPopUpMenu.popup(pos)
@@ -89,17 +90,17 @@ class ComponentMenu(QtGui.QMenu):
 	def  __init__(self,parent):
 		QtGui.QMenu.__init__(self,parent)
 		self.ActionUp=QtGui.QAction("Up",parent)
-		self.ActionDOWN=QtGui.QAction("Down",parent)
+		self.ActionDown=QtGui.QAction("Down",parent)
 		self.ActionSettings=QtGui.QAction("Settings",parent)
 		self.ActionControl=QtGui.QAction("Control",parent)
 		self.ActionNewConnection=QtGui.QAction("New Connection",parent)
 		self.addAction(self.ActionUp)
-		self.addAction(self.ActionDOWN)
+		self.addAction(self.ActionDown)
 		self.addAction(self.ActionNewConnection)
 		self.addAction(self.ActionControl)
 		self.addAction(self.ActionSettings)
-	def setComponent(component):
-		pass #self.component=component.pos()
+	def setComponent(self,component):
+		self.currentComponent=component
 
 
 
